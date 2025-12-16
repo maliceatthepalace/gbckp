@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+      
+      - name: Build for multiple platforms
+        run: |
+          # Linux 64-bit
+          GOOS=linux GOARCH=amd64 go build -o gb-linux-amd64 main.go
+          
+          # Linux ARM64
+          GOOS=linux GOARCH=arm64 go build -o gb-linux-arm64 main.go
+          
+          # Windows 64-bit
+          GOOS=windows GOARCH=amd64 go build -o gb-windows-amd64.exe main.go
+          
+          # macOS Intel
+          GOOS=darwin GOARCH=amd64 go build -o gb-darwin-amd64 main.go
+          
+          # macOS Apple Silicon
+          GOOS=darwin GOARCH=arm64 go build -o gb-darwin-arm64 main.go
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            gb-linux-amd64
+            gb-linux-arm64
+            gb-windows-amd64.exe
+            gb-darwin-amd64
+            gb-darwin-arm64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
