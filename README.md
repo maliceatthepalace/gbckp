@@ -1,5 +1,7 @@
 # gobackup
 
+![Release](https://github.com/maliceatthepalace/gobackup/actions/workflows/release.yml/badge.svg)
+
 A simple command-line backup tool written in Go that creates timestamped backups of files.
 
 ## Demo
