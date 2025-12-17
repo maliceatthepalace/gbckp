@@ -91,6 +91,9 @@ func main() {
 	failCount := 0
 	
 	for _, source := range sourceFiles {
+		// Clean path to remove trailing slashes (from tab completion)
+		source = filepath.Clean(source)
+		
 		// Check if source exists and get info
 		info, err := os.Stat(source)
 		if os.IsNotExist(err) {
