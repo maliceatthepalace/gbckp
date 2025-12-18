@@ -12,6 +12,15 @@ A simple command-line backup tool written in Go that creates timestamped backups
 
 ## Installation
 
+### via wget on linux
+
+```bash
+curl -L https://github.com/maliceatthepalace/gbckp/releases/download/v0.1.1/gb-linux-amd64 \
+  -o /tmp/gbckp && \
+sudo mv /tmp/gbckp /usr/local/bin/gbckp && \
+sudo chmod +x /usr/local/bin/gbckp
+```
+
 ### From Source
 
 ```bash
